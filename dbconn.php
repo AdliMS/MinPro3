@@ -87,5 +87,4 @@ function update($id, $kegiatan) {
     mysqli_query($conn, $query);
     header("Location: index.php");
 }
-echo 'hi'
 ?>
