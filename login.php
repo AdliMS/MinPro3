@@ -1,8 +1,30 @@
 <?php
 
 session_start();
+
+if (isset($_SESSION['username'])) {
+    header('Location: index.php');
+}
 require 'dbconn.php';
 
+if (isset ($_POST['login'])) {
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) === 1) {
+
+        $_SESSION['username'] = $username;
+        header("Location: index.php");
+        exit;
+    }
+
+    $error = true;
+}
 
 ?>
 
@@ -15,11 +37,11 @@ require 'dbconn.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <body class="bg-dark">
 
 
     <div class="container">
-        <div class="wrapper d-flex align-items-center justify-content-center h-100">
+        <div class="align-items-center d-flex  justify-content-center h-100">
             <div class="card login-form">
                 <div class="card-body">
                     <h5 class="card-title text-center">Login Form</h5>
@@ -27,24 +49,32 @@ require 'dbconn.php';
 
                         <div class="mb-3">
                             <label for="username_input" class="form-label">Username</label>
-                            <input type="username" class="form-control" id="username_input">
+                            <input type="username" class="form-control" id="username_input" name="username">
                         </div>
                         <div class="mb-3">
                             <label for="password_input" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password_input">
+                            <input type="password" class="form-control" id="password_input" name="password">
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                        <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
                         <input type="checkbox" name="remember" id="remember">  <label class="ml-3" for="remember">Ingat Saya</label>
 
                         <div class="sign-up mt-4">
                             Don't have an account? <a href="register.php">Create One</a>
                         </div>
 
+                        <?php if (isset ($error)) : ?>
+                            <p style="color: red;">Username / password salah!</p>    
+                        <?php endif ?>
+
                     </form>
+                    
                 </div>
+                
             </div>
+            
         </div>
+        
     </div>
     
     

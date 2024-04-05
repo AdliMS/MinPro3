@@ -34,7 +34,7 @@ function add($data) {
 
     // melakukan query INSERT INTO ke dalam tabel dengan variabel $kegiatan
     $query = "INSERT INTO list VALUES 
-              ('', '$kegiatan')";
+              ('', NULL, '$kegiatan')";
     mysqli_query($conn, $query);
     header("Location: index.php");
 }
@@ -64,9 +64,9 @@ function register($data) {
 
     // melakukan query INSERT INTO ke dalam tabel dengan variabel $kegiatan
     $query = "INSERT INTO user VALUES 
-              ('', '', '$username', '$email', '$password')";
+              ('', '$username', '$email', '$password')";
     mysqli_query($conn, $query);
-    header("Location: index.php");
+    header("Location: login.php");
 }
 
 // untuk menghapus data
