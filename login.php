@@ -44,7 +44,7 @@ if (isset ($_POST['login'])) {
         <div class="align-items-center d-flex  justify-content-center h-100">
             <div class="card login-form">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Login Form</h5>
+                    <h5 class="card-title text-center">Login</h5>
                     <form action="" method="POST">
 
                         <div class="mb-3">
@@ -57,7 +57,6 @@ if (isset ($_POST['login'])) {
                         </div>
 
                         <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
-                        <input type="checkbox" name="remember" id="remember">  <label class="ml-3" for="remember">Ingat Saya</label>
 
                         <div class="sign-up mt-4">
                             Don't have an account? <a href="register.php">Create One</a>
